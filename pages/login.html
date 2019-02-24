@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>拜拜甜甜圈</div>
+    <img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=889831392,10153837&fm=58" alt="">
+    <form action="/login" method="post">
+        <input id="name" placeholder="用户名" type="text" name="userName">
+        <input id="pass" placeholder="密码" type="password" name="password" >
+        <button >提交</button>
+    </form>
+
+    <script src="login.js"></script>
+    <script>
+        function login() {
+            let username = document.getElementById("name").value;
+            let password = document.getElementById('pass').value;
+            let xhr = null;
+            if(window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            }else {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            const params = 'userName='+ username +'&password=' + password;
+            xhr.open("POST",'/login',true);
+            xhr.send(params);
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState ==4 && xhr.status == 200) {
+                    if (xhr.responseText == 'ok'){
+                        alert('登陆成功')
+                        location.href='/main.html'
+                    }else{
+                        alert('登录失败')
+                    }
+                    console.log(xhr.responseText)
+                    console.log(typeof xhr.responseText)
+                }
+            }
+        }
+    </script>
+</body>
+</html>
